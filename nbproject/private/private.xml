@@ -2,13 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
         <group name="ProducerConsumerAll">
             <file>file:/Users/oliverbrandonbravocedillo/Desktop/nube/ProyectoLenguajeDeProgramacion/src/producerconsumer/GUIFrame.java</file>
             <file>file:/Users/oliverbrandonbravocedillo/Desktop/nube/ProyectoLenguajeDeProgramacion/src/producerconsumer/Consumer.java</file>
             <file>file:/Users/oliverbrandonbravocedillo/Desktop/nube/ProyectoLenguajeDeProgramacion/src/producerconsumer/ProducerConsumer.java</file>
             <file>file:/Users/oliverbrandonbravocedillo/Desktop/nube/ProyectoLenguajeDeProgramacion/src/producerconsumer/Producer.java</file>
             <file>file:/Users/oliverbrandonbravocedillo/Desktop/nube/ProyectoLenguajeDeProgramacion/src/producerconsumer/Buffer.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/victor/Documents/UNI%206TO/lenguajes%20de%20progra/ProyectoLenguajeDeProgramacion-master/ProyectoLenguajeDeProgramacion-master/src/producerconsumer/GUIFrame.java</file>
         </group>
     </open-files>
 </project-private>

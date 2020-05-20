@@ -1,5 +1,7 @@
 package producerconsumer;
 
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -60,11 +62,27 @@ public class GUIFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Tiempo de Espera (ms)");
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Rango de Valores (n, m)");
+
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Productores");
 
         jLabel2.setText("Consumidores");
+
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+
+        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
 
         jLabel3.setText("Tamaño del Buffer");
 
@@ -244,10 +262,142 @@ public class GUIFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+
+        int waitingTime = 0;
+        int bufferSize = 0;
+
+        // waiting Time
+        try {
+        //  Block of code to try
+            waitingTime = Integer.parseInt(this.jTextField1.getText().toString());
+            if(waitingTime > 0 && waitingTime <= 10000){
+                //System.out.println("Correct" );
+            }else{
+                System.out.println("Please select a numbet between 0 and 10000" );
+                JOptionPane.showMessageDialog(jTabbedPane1,
+                    "El tiempo de espera debera ser un valor entre 0 y 10000",
+                    "Error tiempo de espera",
+                    JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            //System.out.println("Time in ms" + waitingTime);
+        }
+        catch(Exception e) {
+            //System.out.println("Error in time");
+            JOptionPane.showMessageDialog(jTabbedPane1,
+                    "El valor de tiempo de espera debe de ser de tipo entero",
+                    "Error tiempo de espera",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        //System.out.println("Time in ms " + waitingTime);
         
+        //producers
         int numberProducers = Integer.parseInt(this.jSpinner1.getValue().toString());
+        
+        
+        //consumers
         int numberConsumers = Integer.parseInt(this.jSpinner2.getValue().toString());
-        int bufferSize = Integer.parseInt(this.jTextField3.getText());
+        
+        
+        //Buffer Size
+        try {
+        //  Block of code to try
+            bufferSize = Integer.parseInt(this.jTextField3.getText());
+            //System.out.println("Buffer Size: " + bufferSize);
+            if(bufferSize >0 && bufferSize <= 100 ){
+                
+            }else{
+                JOptionPane.showMessageDialog(jTabbedPane1,
+                    "El tamaño del buffer debe estar entre 1 y 100",
+                    "Error tamaño de buffer",
+                    JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+        catch(Exception e) {
+            //System.out.println("Error in buffer");
+            JOptionPane.showMessageDialog(jTabbedPane1,
+                    "El tamaño del buffer debe de ser de tipo entero",
+                    "Error tamaño de buffer",
+                    JOptionPane.WARNING_MESSAGE);
+                    return;
+        }
+        
+        //Obtener los numeros
+        
+        
+        String rango = jTextField4.getText();
+        rango = rango.replaceAll("\\s+","");
+        //Validar el formato
+        if(Character.toString(rango.charAt(0)).equals("(")
+           && Character.toString(rango.charAt(2)).equals(",")
+           && Character.toString(rango.charAt(4)).equals(")")){
+            int minimo=0;
+            int maximo=0;
+            //validacion de valor minimo
+            try {
+              //  Block of code to try
+              minimo = Integer.parseInt(Character.toString(rango.charAt(1)));
+              if(minimo<0){
+                  JOptionPane.showMessageDialog(jTabbedPane1,
+                    "El valor de n debe ser un valor entero positivo mayor o igual a cero ",
+                    "Error en valor de n",
+                    JOptionPane.WARNING_MESSAGE);
+                    return;
+              }
+            }
+            catch(Exception e) {
+                JOptionPane.showMessageDialog(jTabbedPane1,
+                    "El valor de n debe ser un valor entero ",
+                    "Error en valor de n",
+                    JOptionPane.WARNING_MESSAGE);
+                    return;
+            }
+            
+            //validacion de valor maximo
+            try {
+              //  Block of code to try
+              maximo = Integer.parseInt(Character.toString(rango.charAt(1)));
+              if(maximo>9){
+                  JOptionPane.showMessageDialog(jTabbedPane1,
+                    "El valor de n debe ser un valor entero positivo menor o igual a 9 ",
+                    "Error en valor de n",
+                    JOptionPane.WARNING_MESSAGE);
+                    return;
+              }
+            }
+            catch(Exception e) {
+                JOptionPane.showMessageDialog(jTabbedPane1,
+                    "El valor de m debe ser un valor entero ",
+                    "Error en valor de m",
+                    JOptionPane.WARNING_MESSAGE);
+                    return;
+            }
+
+            maximo = Integer.parseInt(Character.toString(rango.charAt(3)));
+            System.out.println("Minimo" +minimo);
+            System.out.println("Maximo" +maximo);
+            if(minimo >= maximo){
+                JOptionPane.showMessageDialog(jTabbedPane1,
+                    "El valor de n debe ser menor a m",
+                    "Error en formato de rango",
+                    JOptionPane.WARNING_MESSAGE);
+                    return;
+            }
+        }else{
+            JOptionPane.showMessageDialog(jTabbedPane1,
+                    "El formato de rango debe ser: (n, m) donde n y m \n son numeros enteros positivos y n es menor a m \n y ambos se encuentran entre 0 y 9",
+                    "Error en formato de rango",
+                    JOptionPane.WARNING_MESSAGE);
+                    return;
+        }
+        
+        
+
+        
+        
+        
         
         
          // Validar datos correctos obtenidos de la GUI
@@ -267,6 +417,14 @@ public class GUIFrame extends javax.swing.JFrame {
         */
        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,4 +489,6 @@ public class GUIFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
+    private javax.swing.JOptionPane jPane1;
+    private javax.swing.JFrame frame1;
 }
